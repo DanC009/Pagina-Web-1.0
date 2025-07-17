@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Unidad Educativa José Domingo de Santistevan: formación integral en Guayaquil. Niveles inicial, básica y bachillerato." />
+  <meta name="keywords" content="educación, Guayaquil, colegio, Santistevan, bachillerato, inicial, básica" />
+  <title>Unidad Educativa José Domingo de Santistevan</title>
+  <style>
+    :root {
+      --naranja: #f77f00;
+      --blanco: #ffffff;
+      --gris: #f2f2f2;
+      --azul-oscuro: #003049;
+      --fuente-principal: 'Segoe UI', sans-serif;
+      --sombra-card: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: var(--fuente-principal);
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #ffffff, #e3f2fd);
+      color: var(--azul-oscuro);
+    }
+
+    header {
+      background: linear-gradient(to right, var(--naranja), var(--azul-oscuro));
+      color: var(--blanco);
+      padding: 2rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    header img {
+      width: 100px;
+      margin-bottom: 1rem;
+    }
+
+    nav {
+      background-color: var(--blanco);
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 2px solid var(--naranja);
+    }
+
+    nav a {
+      color: var(--azul-oscuro);
+      margin: 0 1.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+      cursor: pointer;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blanco);
+      background-color: var(--naranja);
+      box-shadow: 0 0 8px var(--naranja);
+    }
+
+    main section {
+      padding: 3rem 10%;
+      background-color: var(--gris);
+      display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      min-height: 400px;
+    }
+
+    main section.active {
+      display: block;
+      opacity: 1;
+    }
+
+    main section:nth-child(even) {
+      background-color: #ffffff;
+    }
+
+    h2 {
+      color: var(--naranja);
+      margin-bottom: 1rem;
+    }
+
+    .card {
+      background: linear-gradient(to bottom right, #ffffff, #fff3e0);
+      borSd var(--naranja);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 12px;
+      box-shadow: var(--sombra-card);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    footer {
+      background: linear-gradient(to right, var(--azul-oscuro), var(--naranja));
+      color: var(--blanco);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    form {
+      background-color: var(--blanco);
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--naranja);
+      box-shadow: var(--sombra-card);
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 0.7rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: var(--naranja);
+      color: var(--blanco);
+      padding: 0.7rem 2rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #e76f00;
+      transform: scale(1.05);
+    }
+
+    .galeria-carousel {
+      position: relative;
+      max-width: 800px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    .galeria-carousel img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      object-fit: cover;
+    s
+
+    .btn-galeria {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.4);
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 1;
+      border-radius: 4px;
+    }
+
+    .btn-galeria:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .btn-galeria:first-of-type { left: 10px; }
+    .btn-galeria:last-of-type { right: 10px; }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      header img { width: 70px; }
+      .galeria-carousel img { height: 250px; }
+      nav a { display: block; margin: 0.5rem 0; }
+    }
+
+    .social-floating {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 200;
+    }
+
+    .social-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .social-icon img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .social-icon:hover {
+      transform: scale(1.15);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+    }
+
+    .social-icon.ig { background: linear-gradient(to right, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .social-icon.fb { background-color: #1877f2; }
+    .social-icon.form { background-color: #ff5722; }
+
+    .seccion-img {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .seccion-img img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: var(--sombra-card);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy-087BFiKsdpTaj4Z9iAa1uIfNS8JsK_z1A&s" alt="Logo del colegio José Domingo de Santistevan">
+    <h1>Unidad Educativa José Domingo de Santistevan</h1>
+    <p>Comprometidos con la excelencia educativa en Guayaquil</p>
+  </header>
+
+  <nav>
+    <a href="#" data-seccion="inicio" class="active">Inicio</a>
+    <a href="#" data-seccion="quienes">Quiénes Somos</a>
+    <a href="#" data-seccion="niveles">Niveles de Estudio</a>
+    <a href="#" data-seccion="contacto">Contáctenos</a>
+  </nav>
+
+ <main>
+  <section id="inicio" class="active" aria-label="Inicio">
+    <div class="marco">
+      <h2>Bienvenidos a la Unidad Educativa José Domingo de Santistevan</h2>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSs5bEx7wKAiHnm9_98QWIVTMP9vxe5bLwUA&s" alt="Imagen institucional" style="width:100%; max-width:600px; display:block; margin:10px auto;">
+      <p>Formamos líderes con valores, compromiso y excelencia académica en Guayaquil.</p>
+      <p>Con más de 30 años de experiencia, nos hemos consolidado como una institución educativa de alto nivel, comprometida con el desarrollo integral de nuestros estudiantes.</p>
+      <p>Nuestros valores fundamentales son: <strong>responsabilidad</strong>, <strong>respeto</strong>, <strong>solidaridad</strong> y <strong>disciplina</strong>.</p>
+      <blockquote>“Educar la mente sin educar el corazón no es educar en absoluto.” — Aristóteles</blockquote>
+      <p>📌 Nuestra propuesta educativa incluye:</p>
+      <ul>
+        <li>Docentes altamente capacitados y comprometidos.</li>
+        <li>Infraestructura moderna con laboratorios y aulas digitales.</li>
+        <li>Programas extracurriculares: música, deportes, emprendimiento y robótica.</li>
+        <li>Acompañamiento psicológico y orientación vocacional.</li>
+      </ul>
+      <div class="galeria-carousel">
+        <button onclick="cambiarImagen(-1)" class="btn-galeria" aria-label="Anterior imagen">&#10094;</button>
+        <img id="imagenGaleria" src="https://i0.wp.com/srradio.com.ec/wp-content/uploads/2024/05/sr.santiestebandeportes.gif?resize=430%2C242&ssl=1" alt="Instalaciones deportivas">
+        <button onclick="cambiarImagen(1)" class="btn-galeria" aria-label="Siguiente imagen">&#10095;</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="quienes" aria-label="Quiénes Somos">
+    <div class="marco">
+      <h2>¿Quiénes Somos?</h2>
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTovqgXR32ywwMq2PnG7MOEIbXSmpHDrMljdYw-U6RqyOW7BA95vdzzdj9fzCks95zlJQ-XtyqsVRO99iUTv_P-8fLXyWVm-EredjIHnGf7n45Z_nnPHE_o3fCSz81aB0vVn_eoqMo6Bc/s1600/26elsantistevan.jpg" alt="Equipo educativo" style="width:100%; max-width:600px; display:block; margin:10px auto;">
+      <p>Somos una institución educativa de tradición y excelencia, enfocada en formar estudiantes íntegros, con valores y habilidades para enfrentar los desafíos del futuro.</p>
+
+      <h2>🎯 Misión</h2>
+      <p>Brindar una educación integral, humanista y tecnológica que prepare a nuestros estudiantes para un mundo globalizado, inculcando valores y habilidades necesarias para su desarrollo personal y profesional.</p>
+
+      <h2>🌟 Visión</h2>
+      <p>Ser reconocidos como una institución líder a nivel nacional e internacional por su innovación pedagógica, calidad académica y compromiso con la sociedad.</p>
+
+      <h2>🎯 Objetivos Institucionales</h2>
+      <ul>
+        <li>Garantizar una formación académica de excelencia.</li>
+        <li>Fomentar el pensamiento crítico y la creatividad.</li>
+        <li>Promover el respeto, la solidaridad y la inclusión.</li>
+        <li>Impulsar el uso de tecnología educativa desde temprana edad.</li>
+        <li>Motivar la participación estudiantil en actividades culturales, cívicas y deportivas.</li>
+        <li>Desarrollar competencias ciudadanas y valores democráticos.</li>
+      </ul>
+
+      <h2>📖 Breve Historia</h2>
+      <p>La Unidad Educativa José Domingo de Santistevan fue fundada con el objetivo de brindar educación de calidad a la comunidad guayaquileña. Desde entonces, ha graduado a miles de jóvenes que hoy se desempeñan con éxito en diversos campos del saber y la sociedad.</p>
+      <p>Durante su trayectoria, la institución ha mantenido una sólida relación con las familias, priorizando el bienestar estudiantil y promoviendo un entorno seguro e inclusivo.</p>
+      <p>La constante actualización pedagógica, la incorporación de TICs y la apertura a nuevas metodologías nos han permitido adaptarnos a los cambios del mundo contemporáneo sin perder nuestros principios fundacionales.</p>
+    </div>
+  </section>
+
+  <section id="niveles" aria-label="Niveles Educativos">
+    <h2>Niveles Educativos</h2>
+
+    <div class="card">
+      <h3>Educación Inicial y Básica</h3>
+      <img src="https://pbs.twimg.com/media/GStmU7wWYAE3SBM.jpg:large" alt="Niños en clase" style="width:100%; max-width:600px; display:block; margin:10px auto;">
+      <p>Fundamentos sólidos en valores, lenguaje, ciencias y arte para los más pequeños.</p>
+      <p>En esta etapa potenciamos las habilidades motrices, emocionales y cognitivas con un enfoque lúdico y afectivo. Contamos con aulas temáticas, rincones de juego y material pedagógico actualizado.</p>
+      <p>En la Educación Básica se refuerzan las competencias lingüísticas, matemáticas y científicas con metodologías activas e interactivas. Se incluyen materias como Computación, Inglés, Música y Educación Física.</p>
+      <p>📘 Algunas actividades destacadas incluyen:</p>
+      <ul>
+        <li>Proyectos escolares mensuales y ferias de ciencias.</li>
+        <li>Lectura guiada con biblioteca móvil.</li>
+        <li>Talleres de arte, reciclaje y convivencia escolar.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Bachillerato General Unificado</h3>
+      <img src="https://eus-www.sway-cdn.com/s/xK7jQ1RSrm1H3rXA/images/INf1y0uDUCcTdm?quality=2592&allowAnimation=true" alt="Estudiantes de bachillerato" style="width:100%; max-width:600px; display:block; margin:10px auto;">
+      <p>Formación académica de alto nivel en Bachilleratos Duales y No Duales.</p>
+      <p>Los estudiantes pueden elegir entre Bachillerato en Ciencias y Técnico. El primero prepara para estudios universitarios y el segundo ofrece habilidades prácticas en áreas como informática y administración.</p>
+      <p>Se trabaja con proyectos integradores, salidas pedagógicas y simulacros para pruebas nacionales. Además, se promueve la participación en clubes académicos y competencias interescolares.</p>
+      <p>🔍 En este nivel ofrecemos:</p>
+      <ul>
+        <li>Preparación para el Examen Transformar y pruebas internacionales.</li>
+        <li>Orientación vocacional y consejería universitaria.</li>
+        <li>Clubes de investigación, debate, tecnología y emprendimiento.</li>
+        <li>Prácticas preprofesionales en empresas y organismos aliados.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contacto" aria-label="Contáctenos">
+    <div class="marco">
+      <h2>Contáctenos</h2>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSs5bEx7wKAiHnm9_98QWIVTMP9vxe5bLwUA&s" alt="Oficinas administrativas" style="width:100%; max-width:600px; display:block; margin:10px auto;">
+      <p>📍 Dirección: Puerto Santa Ana, Guayaquil, Ecuador</p>
+      <p>📧 Correos:<br>
+        infosantistevan@jbgye.org.ec<br>
+        admisiones.santistevan@jbgye.org.ec</p>
+      <p>📞 Teléfono: 0959411791</p>
+      <p>🗺️ <strong>Ubicación:</strong> <a href="https://www.google.com/maps/place/Puerto+Santa+Ana,+Guayaquil" target="_blank">Ver en Google Maps</a></p>
+      <p>🕘 <strong>Horario de atención administrativa:</strong><br>Lunes a Viernes: 08h00 a 16h00</p>
+      <p>💬 También puedes escribirnos a través de nuestras redes sociales o llenar el siguiente formulario:</p>
+      <form action="#" method="post">
+        <label>Nombre completo:
+          <input type="text" name="nombre" required>
+        </label>
+        <label>Correo electrónico:
+          <input type="email" name="email" required>
+        </label>
+        <label>Mensaje:
+          <textarea name="mensaje" rows="4" required></textarea>
+        </label>
+        <button type="submit">Enviar</button>
+      </form>
+      <p>🤝 ¡Será un gusto atenderte y brindarte la información que necesitas para formar parte de nuestra gran familia educativa!</p>
+      <p>Síguenos también en nuestras redes sociales oficiales para conocer más sobre nuestras actividades y logros institucionales.</p>
+    </div>
+  </section>
+</main>
+
+  <footer>
+    <p>&copy; 2025 Unidad Educativa José Domingo de Santistevan. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const galeriaImagenes = [
+      "https://i0.wp.com/srradio.com.ec/wp-content/uploads/2024/05/sr.santiestebandeportes.gif?resize=430%2C242&ssl=1",
+      "https://lanotaenlinea.com/wp-content/uploads/2025/01/colegio1.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Q7XB8tmuWq4xc0la10SnkelPQEpyRiu9tQ&s"
+    ];
+    let indiceGaleria = 0;
+
+    function cambiarImagen(direccion) {
+      const imagen = document.getElementById("imagenGaleria");
+      indiceGaleria = (indiceGaleria + direccion + galeriaImagenes.length) % galeriaImagenes.length;
+      imagen.classList.remove("fade-in");
+      void imagen.offsetWidth;
+      imagen.src = galeriaImagenes[indiceGaleria];
+      imagen.classList.add("fade-in");
+    }
+
+    let intervalo = setInterval(() => cambiarImagen(1), 5000);
+    document.querySelector(".galeria-carousel").addEventListener("mouseenter", () => clearInterval(intervalo));
+    document.querySelector(".galeria-carousel").addEventListener("mouseleave", () => intervalo = setInterval(() => cambiarImagen(1), 5000));
+
+    const linksNav = document.querySelectorAll("nav a");
+    const secciones = document.querySelectorAll("main section");
+
+    linksNav.forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const target = link.getAttribute("data-seccion");
+
+        linksNav.forEach(l => l.classList.remove("active"));
+        secciones.forEach(s => s.classList.remove("active"));
+
+        link.classList.add("active");
+        const seccionMostrar = document.getElementById(target);
+        if (seccionMostrar) seccionMostrar.classList.add("active");
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+   <div class="social-floating">
+    <a href="https://www.instagram.com/uesantistevan.jbg/" target="_blank" class="social-icon ig" aria-label="Instagram">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="28">
+    </a>
+    <a href="https://www.facebook.com/uesantistevan" target="_blank" class="social-icon fb" aria-label="Facebook">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="28">
+    </a>
+    <a href="https://santistevan.runacode.com/public/preinscripcionesweb" target="_blank" class="social-icon form" aria-label="Formulario de inscripción">
+      <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Formulario" width="28">
+    </a>
+  </div>
+</body>
+</html>
+
+
